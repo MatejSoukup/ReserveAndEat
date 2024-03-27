@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 //Abl require
-const {list, getById} = require("../abl/categoryAbl");
+const {list, getById} = require("../abl/roleAbl");
 
 router.get("/get", (req, res) => {
     if (req.query.hasOwnProperty('id')) {
@@ -17,14 +17,5 @@ router.get("/get", (req, res) => {
 router.get("/list", (req, res) => {
     list(req, res);
 })
-
-router.post("/create", (req, res) => {
-
-})
-
-router.post("/update", (req, res) => {
-
-})
-
 
 module.exports = router;

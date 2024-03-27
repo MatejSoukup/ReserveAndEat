@@ -7,10 +7,13 @@ app.use(express.urlencoded({ extended: true })); // podpora pro application/x-ww
 
 //Controller require
 const categoryController = require("./controllers/categoryController")
+const roleController = require("./controllers/roleController")
 
 //Controller use
 
 app.use("/category" , categoryController)
+app.use("/role" , roleController)
+
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
