@@ -16,7 +16,7 @@ class categoryDao{
           const category = await fs.promises.readFile(
             DEFAULT_DIR_PATH + `/${categoryId}.json`, "utf-8"
             );
-
+            
             return JSON.parse(category);
 
         } catch (error) {

@@ -12,7 +12,8 @@ const roleController = require("./controllers/roleController")
 //Controller use
 
 app.use("/category" , categoryController)
-app.use("/role" , roleController)
+app.use("/role", roleController)
+
 
 
 app.listen(port, () => {
