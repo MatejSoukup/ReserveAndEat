@@ -8,12 +8,13 @@ app.use(express.urlencoded({ extended: true })); // podpora pro application/x-ww
 //Controller require
 const categoryController = require("./controllers/categoryController")
 const roleController = require("./controllers/roleController")
+const userController = require("./controllers/userController")
 
 //Controller use
 
 app.use("/category" , categoryController)
 app.use("/role", roleController)
-
+app.use("/user" , userController)
 
 
 app.listen(port, () => {

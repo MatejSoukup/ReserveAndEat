@@ -1,11 +1,11 @@
 const Ajv = require("ajv")
 
-const roleDao = require("../../dao/role/roleDao")
+const categoryDao = require("../../dao/category/categoryDao")
 
 const ajv = new Ajv()
-const dao = new roleDao()
+const dao = new categoryDao()
 
-const roleSchema = {
+const categorySchema = {
     type: "object",
     properties: {
       name: { type: "string" },
@@ -17,9 +17,9 @@ const roleSchema = {
 
 async function createAbl(req , res){
     try {
-        const role = req.body;
+        let category = req.body;
 
-        const valid = ajv.validate(roleSchema , role)
+        const valid = ajv.validate(categorySchema , category)
 
         if (!valid) {
             res.status(400).json({
@@ -30,8 +30,8 @@ async function createAbl(req , res){
             return;
         }
 
-        dao.create(role)
-        res.json(role)
+        category = dao.create(category)
+        res.json(category)
 
     } catch (e) {
         res.status(500).json({ message: e.message });

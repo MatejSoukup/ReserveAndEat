@@ -85,7 +85,7 @@ class roleDao{
               return roleList;
 
         } catch (error) {
-            throw { code: "failedToListCategories", message: error.message };
+            throw { code: "failedToListRoles", message: error.message };
         }
     }
 
