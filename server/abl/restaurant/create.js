@@ -11,11 +11,17 @@ const restaurantSchema = {
     type: "object",
     properties: {
       name: { type: "string" },
-      surname: { type: "string" },
+      address: { type: "string" },
       email: { type: "string" },
-      roleId: { type: "string" , default: defaultRoleId },
+      website: { type: "string" },
+      phone: {type: "string"},
+      shortDescription: {type: "string"},
+      description: {type: "string"},
+      openingHours: {type: "string"},
+      categoryId: {type: "string"},
+      userId: {type: "string"}
     },
-    required: ["name","surname","email"],
+    required: ["name","address","userId"],
     additionalProperties: false,
   };
   
@@ -39,17 +45,6 @@ async function createAbl(req , res){
             });
             return;
         }
-
-    const restaurantList = await dao.list();
-    const emailExists = restaurantList.some((u) => u.email === restaurant.email);
-
-    if (emailExists) {
-        res.status(400).json({
-            code: "emailAlreadyExists",
-            message: `Restaurant with email ${restaurant.email} already exists`,
-        });
-        return;
-    }
 
         restaurant = await dao.create(restaurant)
         res.json(restaurant)

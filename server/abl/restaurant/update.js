@@ -1,36 +1,36 @@
 const Ajv = require("ajv")
 
-const userDao = require("../../dao/user/userDao")
+const restaurantDao = require("../../dao/restaurant/restaurantDao")
 
 const ajv = new Ajv()
-const dao = new userDao()
+const dao = new restaurantDao()
 
 const defaultRoleId = "ec3e330b0c8ddfe9472ab1cdcef6ebf3";
 
-const userSchema = {
+const restaurantSchema = {
     type: "object",
     properties: {
-        id: { type: "string" },
-        name: { type: "string" },
-        surname: { type: "string" },
-        email: { type: "string" },
-        roleId: { type: "string" , default: defaultRoleId },
-        favoriteRestaurants: {
-            type: "array",
-            items: {
-                type: "string"
-            }
-        }
+      id: {type: "string"},
+      name: { type: "string" },
+      address: { type: "string" },
+      email: { type: "string" },
+      website: { type: "string" },
+      phone: {type: "string"},
+      shortDescription: {type: "string"},
+      description: {type: "string"},
+      openingHours: {type: "string"},
+      categoryId: {type: "string"},
+      restaurantId: {type: "string"}
     },
-    required: ["id", "name", "surname", "email"],
+    required: ["name","address","restaurantId"],
     additionalProperties: false,
 };
 
 async function updateAbl(req , res){
     try {
-        const user = req.body;
+        const restaurant = req.body;
 
-        const valid = ajv.validate(userSchema , user)
+        const valid = ajv.validate(restaurantSchema , restaurant)
 
         if (!valid) {
             res.status(400).json({
@@ -42,28 +42,28 @@ async function updateAbl(req , res){
         }
 
         //Checking for email duplication
-        const userList = await dao.list();
-        const emailExists = userList.some((u) => u.email === user.email);
+        const restaurantList = await dao.list();
+        const emailExists = restaurantList.some((u) => u.email === restaurant.email);
     
         if (emailExists) {
             res.status(400).json({
                 code: "emailAlreadyExists",
-                message: `User with email ${user.email} already exists`,
+                message: `Restaurant with email ${restaurant.email} already exists`,
             });
             return;
         }    
 
-        const updatedUser = await dao.update(user)
+        const updatedRestaurant = await dao.update(restaurant)
 
-        if (!updatedUser) {
+        if (!updatedRestaurant) {
             res.status(404).json({
               code: "eventNotFound",
-              message: `User ${user.id} not found`,
+              message: `Restaurant ${restaurant.id} not found`,
             });
             return;
           }
 
-        res.json(updatedUser)
+        res.json(updatedRestaurant)
 
     } catch (e) {
         res.status(500).json({ message: e.message });
