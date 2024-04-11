@@ -88,10 +88,6 @@ class userDao{
             throw { code: "failedToListUsers", message: error.message };
         }
     }
-
-
-
-
 }
 
 module.exports = userDao;

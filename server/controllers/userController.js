@@ -8,6 +8,8 @@ const getAbl = require("../abl/user/get");
 const updateAbl = require("../abl/user/update")
 const listAbl = require("../abl/user/list");    
 const deleteAbl = require("../abl/user/delete");
+const addFavoriteRestaurantAbl = require("../abl/user/addFavoriteRestaurant");
+const deleteFavoriteRestaurantAbl = require("../abl/user/deleteFavoriteRestaurant");
 
 
 router.post("/create", (req, res) => {
@@ -31,6 +33,15 @@ router.get("/list", (req , res) => {
 
 router.delete("/delete", (req ,res) => {
     deleteAbl(req , res)
+})
+
+router.post("/favorite/add", (req, res) => {
+    addFavoriteRestaurantAbl(req, res);
+})
+
+
+router.post("/favorite/delete", (req, res) => {
+    deleteFavoriteRestaurantAbl(req, res)
 })
 
 module.exports = router;
