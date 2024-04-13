@@ -15,11 +15,11 @@ router.post("/create", (req, res) => {
 router.post("/update", (req, res) =>{
     updateAbl(req , res);
 })
-
+//
 router.get("/get" , (req, res) => {
     getAbl(req , res)
 });
-
+//
 router.get("/list", (req , res) => {
     listAbl(req , res)
 });

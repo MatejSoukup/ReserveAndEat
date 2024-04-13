@@ -7,19 +7,20 @@ const updateAbl = require("../abl/restaurant/update")
 const getAbl = require("../abl/restaurant/get");
 const listAbl = require("../abl/restaurant/list");    
 const deleteAbl = require("../abl/restaurant/delete");
-
+//
 router.post("/create", (req, res) => {
     createAbl(req , res)
 });
-
+//
 router.post("/update", (req, res) =>{
     updateAbl(req , res);
 })
 
+//
 router.get("/get" , (req, res) => {
     getAbl(req , res)
 });
-
+//TODO: + filter by city + categoryid
 router.get("/list", (req , res) => {
     listAbl(req , res)
 });

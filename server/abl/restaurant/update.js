@@ -12,7 +12,15 @@ const restaurantSchema = {
     properties: {
       id: {type: "string"},
       name: { type: "string" },
-      address: { type: "string" },
+      address: {
+        type: "object",
+        properties: {
+            city: { type: "string" },
+            street: { type: "string" },
+            country: { type: "string" }
+        },
+        required: ["city", "street", "country"]
+      },
       email: { type: "string" },
       website: { type: "string" },
       phone: {type: "string"},
@@ -20,7 +28,7 @@ const restaurantSchema = {
       description: {type: "string"},
       openingHours: {type: "string"},
       categoryId: {type: "string"},
-      restaurantId: {type: "string"}
+      userId: {type: "string"}
     },
     required: ["name","address","restaurantId"],
     additionalProperties: false,
@@ -39,25 +47,13 @@ async function updateAbl(req , res){
                 validationError: ajv.errors,
             });
             return;
-        }
-
-        //Checking for email duplication
-        const restaurantList = await dao.list();
-        const emailExists = restaurantList.some((u) => u.email === restaurant.email);
-    
-        if (emailExists) {
-            res.status(400).json({
-                code: "emailAlreadyExists",
-                message: `Restaurant with email ${restaurant.email} already exists`,
-            });
-            return;
         }    
 
         const updatedRestaurant = await dao.update(restaurant)
 
         if (!updatedRestaurant) {
             res.status(404).json({
-              code: "eventNotFound",
+              code: "restaurantNotFound",
               message: `Restaurant ${restaurant.id} not found`,
             });
             return;

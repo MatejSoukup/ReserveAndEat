@@ -9,12 +9,16 @@ app.use(express.urlencoded({ extended: true })); // podpora pro application/x-ww
 const categoryController = require("./controllers/categoryController")
 const roleController = require("./controllers/roleController")
 const userController = require("./controllers/userController")
+const restaurantController = require("./controllers/restaurantController")
+const reservationController = require("./controllers/reservationController")
 
 //Controller use
 
-app.use("/category" , categoryController)
-app.use("/role", roleController)
-app.use("/user" , userController)
+app.use("/category" , categoryController);
+app.use("/role", roleController);
+app.use("/user" , userController);
+app.use("/restaurant", restaurantController);
+app.use("/reservation", reservationController);
 
 
 app.listen(port, () => {

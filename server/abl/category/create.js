@@ -30,7 +30,7 @@ async function createAbl(req , res){
             return;
         }
 
-        category = dao.create(category)
+        category = await dao.create(category)
         res.json(category)
 
     } catch (e) {

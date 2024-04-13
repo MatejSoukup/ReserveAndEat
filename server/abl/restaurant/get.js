@@ -32,7 +32,6 @@ async function getAbl(req , res){
         }
 
         let restaurant = await dao.get(reqParams.id);
-        restaurant.role = await daoRole.get(restaurant.roleId)
         if(!restaurant){
             res.status(404).json({
                 code: "restaurantNotFound",
@@ -40,6 +39,7 @@ async function getAbl(req , res){
               });
             return;
         }
+        
 
         res.json(restaurant); 
 

@@ -17,7 +17,7 @@ router.post("/create", (req, res) => {
 });
 
 
-
+//
 router.get("/get" , (req, res) => {
     getAbl(req , res)
 });
@@ -35,6 +35,7 @@ router.delete("/delete", (req ,res) => {
     deleteAbl(req , res)
 })
 
+//
 router.post("/favorite/add", (req, res) => {
     addFavoriteRestaurantAbl(req, res);
 })

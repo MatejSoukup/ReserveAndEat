@@ -34,6 +34,13 @@ async function addFavoriteRestaurantAbl(req , res){
         }
 
         let user = await dao.get(reqParams.id);
+        if(!user){
+            res.status(404).json({
+                code: "userNotFound",
+                message: `User ${reqParams.id} not found`,
+              });
+            return;
+        }
 
         if(!user.favoriteRestaurants){
             user.favoriteRestaurants = []
@@ -44,7 +51,7 @@ async function addFavoriteRestaurantAbl(req , res){
         if (restaurantIsFavorite) {
             res.status(400).json({
                 code: "restaurantAlreadyFavorite",
-                message: `Restaurant with id ${reqParams.restaurantId} already is favorite`,
+                message: `Restaurant with id ${reqParams.restaurantId} is already favorite`,
             });
             return;
         }       

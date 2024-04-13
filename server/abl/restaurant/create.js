@@ -5,13 +5,19 @@ const restaurantDao = require("../../dao/restaurant/restaurantDao")
 const ajv = new Ajv()
 const dao = new restaurantDao()
 
-const defaultRoleId = "ec3e330b0c8ddfe9472ab1cdcef6ebf3";
-
 const restaurantSchema = {
     type: "object",
     properties: {
       name: { type: "string" },
-      address: { type: "string" },
+      address: {
+        type: "object",
+        properties: {
+            city: { type: "string" },
+            street: { type: "string" },
+            country: { type: "string" }
+        },
+        required: ["city", "street", "country"]
+      },
       email: { type: "string" },
       website: { type: "string" },
       phone: {type: "string"},
@@ -30,17 +36,13 @@ async function createAbl(req , res){
     try {
         let restaurant = req.body;
 
-        if(!restaurant.roleId){
-            restaurant.roleId = defaultRoleId;
-        }
-
         
         const valid = ajv.validate(restaurantSchema , restaurant)
     
         if (!valid) {
             res.status(400).json({
                 code: "dtoInIsNotValid",
-                message: "dtoIn is not valid",
+                message: "  ",
                 validationError: ajv.errors,
             });
             return;

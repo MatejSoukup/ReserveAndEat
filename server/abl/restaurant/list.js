@@ -4,7 +4,22 @@ const dao = new restaurantDao()
 
 async function listAbl(req , res){
     try {
-        const restaurantList = await dao.list()
+        const filters = req.body
+
+        let restaurantList = await dao.list()
+
+        if(filters.userId){
+            restaurantList = restaurantList.filter(item => item.userId === filters.userId)
+        }else{
+            if(filters.city){
+                restaurantList = restaurantList.filter(item => item.address.city === filters.city)
+            }
+            if(filters.categoryId){
+                
+                restaurantList = restaurantList.filter(item => item.categoryId === filters.categoryId)
+            } 
+        }
+
 
         res.json(restaurantList);
 
