@@ -1,4 +1,6 @@
 import './App.css';
+import RestaurantForm from './components/Forms/Restaurant/RestaurantForm';
+import ReservationForm from './components/Forms/User/ReservationForm';
 import Navbar from './components/Navbar';
 import RestuarantCard from './components/RestaurantCard';
 
@@ -17,9 +19,7 @@ function App() {
   return (
     <div className="App">
       <Navbar/>
-      {restaurantList.map(restaurant => 
-        <RestuarantCard restaurant={restaurant}/>
-      )}
+      <RestaurantForm/>
     </div>
   );
 }

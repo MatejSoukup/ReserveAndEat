@@ -18,6 +18,10 @@ return(
         <div>{props.restaurant.openingHours}</div>
     </div>
     <div>
+        Category
+        <div>{props.restaurant.openingHours}</div>
+    </div>
+    <div>
         Contacts
         <div>Address: {props.restaurant.address.street}, {props.restaurant.address.city}, {props.restaurant.address.country}</div>
         <div>Phone: {props.restaurant.phone}</div>
