@@ -1,4 +1,7 @@
-function ReservationCardRestaurant(){
+function ReservationCardRestaurant(props){
+    const isConfirmed = props.reservation.status === "confirmed";
+    const isCancelled = props.reservation.status === "cancelled";
+
     return(
         <div>
         <div>
@@ -19,11 +22,13 @@ function ReservationCardRestaurant(){
             </div>   
         </div>
         <div>
-            <div></div>
-            <div></div>
+            <div>
+                <div>{isCancelled ? "cancelled" : "disabled cancelled"}</div>
+                <div>{isConfirmed ? "confirmed" : "disabled confirmed"}</div>
+            </div>
         </div>
-        
-        
     </div>
     )
 }
+
+export default ReservationCardRestaurant;
