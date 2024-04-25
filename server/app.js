@@ -1,9 +1,11 @@
-const express = require('express')
-const app = express()
-const port = 8000
+const express = require('express');
+const cors = require('cors');
+const app = express();
+const port = 8000;
 
 app.use(express.json()); // podpora pro application/json
 app.use(express.urlencoded({ extended: true })); // podpora pro application/x-www-form-urlencoded
+app.use(cors());
 
 //Controller require
 const categoryController = require("./controllers/categoryController")
