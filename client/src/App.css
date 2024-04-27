@@ -28,6 +28,41 @@
   color: #61dafb;
 }
 
+.Navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  padding: 0 20px;
+  background-color: #9C2542;
+}
+
+.Menu {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  font-size: 32px;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.logo:hover {
+  cursor: pointer;
+}
+
+.circle {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: #D9D9D9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
@@ -35,4 +70,94 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+a:hover {
+  cursor: pointer;
+}
+
+
+.listHeader{
+  font-size: 40px;
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.page{
+  max-width: 1200px;
+  margin: auto;
+}
+
+.backgroundReservation{
+  background-color: #D9D9D9;
+  border-radius: 16px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  row-gap: 12px;
+}
+
+.reservationCard {
+  background-color: white;
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 8vh;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.cardHeader {
+  font-size: 32px;
+  display: flex;
+  margin: 0px 16px;
+}
+
+.cardBody {
+  display: flex;
+  margin: 0px 20px;
+  color: grey;
+  column-gap: 10px;
+}
+
+.reservationStatus {
+  font-size: 16px;
+  margin-left: auto;
+  margin-right: 16px;
+}
+
+.backgroundRestaurant{
+  background-color: #D9D9D9;
+  border-radius: 16px;
+  padding: 12px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  row-gap: 12px;
+}
+
+.restaurantCard{
+  background-color: white;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 16px;
+  height: 250px;
+  width: 377px;
+  margin: 0 auto;
+}
+
+
+.iconContainer {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cardContent {
+  margin-top: auto;
 }

@@ -1,11 +1,16 @@
+import Icon from '@mdi/react';
+import { mdiCancel } from '@mdi/js';
+import { mdiCheck } from '@mdi/js';
+import { mdiTimerSand } from '@mdi/js';
+
 function ReservationCardUser(props){
     return(
-        <div>
+        <div className="reservationCard">
             <div>
-                <div>
+                <div className="cardHeader">
                     {props.reservation.restaurant.name}
                 </div>
-                <div>
+                <div className="cardBody">
                     <div>
                         {props.reservation.restaurant.address.street}
                     </div>
@@ -18,8 +23,10 @@ function ReservationCardUser(props){
                     </div>    
                 </div>   
             </div>
-            <div>
-                {props.reservation.status}
+            <div className="reservationStatus">
+            {props.reservation.status === "cancelled" && <Icon path={mdiCancel} size={2} color={"#FF0000"} />}
+            {props.reservation.status === "confirmed" && <Icon path={mdiCheck} size={2} color={"#00D909"}/>}
+            {props.reservation.status === "pending" && <Icon path={mdiTimerSand} size={2} color={"#FFC700"}/>}
             </div>
             
             

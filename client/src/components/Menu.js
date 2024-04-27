@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useContext } from "react";
 import { UserContext } from "./UserContext";
+import Icon from '@mdi/react';
+import { mdiAccount } from '@mdi/js';
 import "./CSS/Menu.css"
 
 
@@ -11,14 +13,16 @@ export function Menu(){
         return(
             <li className='nav-item'>
                 <a className='icon-button' onClick={() => setOpen(!open)}>
-                    X
+                    <div className='circle'>
+                        <Icon path={mdiAccount} size={1.5} />
+                    </div>
                 </a>
                 
                 {open && <DropdownMenu>
                     {
                         userList.map((user) => (
                             <DropdownItem key={user.id}>
-                             <div onClick={() => handlerMap.login(user.id)}>{user.name}</div> 
+                                <div onClick={() => handlerMap.login(user.id)}>{user.name}</div>
                             </DropdownItem>
                           ))
                     }

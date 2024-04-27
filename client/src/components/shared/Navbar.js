@@ -1,11 +1,16 @@
+import { useNavigate } from "react-router-dom";
+import { Menu } from "../Menu";
+
 function Navbar(){
+    const navigate = useNavigate();
+
     return(
-        <div>
-            <div>
+        <div className="Navbar">
+            <div className="logo" onClick={() => navigate("/")}>
                 ReserveAndEat
             </div>
             <div>
-                Logo
+                <Menu/>
             </div>
         </div>
     )

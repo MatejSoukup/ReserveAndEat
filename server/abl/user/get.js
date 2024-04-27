@@ -2,10 +2,12 @@ const Ajv = require("ajv")
 
 const userDao = require("../../dao/user/userDao")
 const roleDao = require("../../dao/role/roleDao")
+const restaurantDao = require("../../dao/restaurant/restaurantDao")
 
 const ajv = new Ajv()
 const dao = new userDao()
 const daoRole = new roleDao()
+const daoRestaurant = new restaurantDao()
 
 const schema = {
     type: "object",
@@ -40,6 +42,13 @@ async function getAbl(req , res){
               });
             return;
         }
+
+        const favoriteRestaurants = await Promise.all(user.favoriteRestaurants.map(async (restaurantId) => {
+          const restaurant = await daoRestaurant.get(restaurantId);
+          return restaurant;
+        }));
+
+        user.favoriteRestaurants = favoriteRestaurants;
 
         res.json(user); 
 
