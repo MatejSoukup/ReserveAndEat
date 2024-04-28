@@ -1,12 +1,13 @@
 import { useCallback, useContext, useEffect } from "react";
 import { UserContext } from "./UserContext";
 import { DashboardContext } from "./DashboardContext";
+import RestaurantList from "./RestaurantList";
 import ReservationList from "./ReservationList";
 import FavoriteRestaurantList from "./FavoriteRestaurantList"
 
 function Dashboard(){
     const {loggedInUser} = useContext(UserContext);
-    const {reservationList,handlerMap} = useContext(DashboardContext);
+    const {reservationList,restaurantList,handlerMap} = useContext(DashboardContext);
 
     useEffect(() =>{
         
@@ -21,22 +22,28 @@ function Dashboard(){
     },[loggedInUser])
 
    if(loggedInUser){
-    console.log(loggedInUser)
-        if(loggedInUser.roleId ==="6ee839e68351065260ffd7c5d6aca006")
+     if(loggedInUser.roleId ==="6ee839e68351065260ffd7c5d6aca006")
         {
             return(
-                <div>restaurant</div>
+                <div className="page">
+                    {restaurantList ? <RestaurantList restaurantList={restaurantList}/>: <div>loading</div>} 
+                </div>
             )
         } else if(loggedInUser.roleId ==="6dc9e10052b05af79d8d274790321b13"){
             return(
-                <div>Admin</div>
+                
+                <div>
+                   Admin
+                </div>
             )
         }else{
             return(<div className="page">
                 <ReservationList reservationList={reservationList}/>
-                <FavoriteRestaurantList restaurants={loggedInUser ? loggedInUser.favoriteRestaurants : [] }/>
+                <FavoriteRestaurantList restaurantList={loggedInUser.favoriteRestaurants}/>
             </div>)
         }
+    }else{
+        return(<div>Login to display dashboard</div>)
     }
     
 }

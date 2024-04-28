@@ -6,7 +6,7 @@ import UserProvider from './components/UserProvider'
 import Dashboard from './components/Dashboard';
 import DashboardProvider from './components/DashboardProvider';
 import NavigationButtons from './components/NavigationButtons';
-import RestaurantList from './components/RestaurantList';
+import Restaurants from './components/Restaurants'
 import RestaurantListProvider from './components/RestaurantListProvider';
 import RestaurantProvider from './components/RestaurantProvider';
 import RestaurantRoute from './components/RestaurantRoute';
@@ -28,7 +28,7 @@ function App() {
                 }/>
                 <Route path="restaurants" element={
                 <RestaurantListProvider>
-                  <RestaurantList/>
+                  <Restaurants/>
                 </RestaurantListProvider>}/>
                 
                 <Route path="restaurantDetail" element={
@@ -37,9 +37,6 @@ function App() {
                 </RestaurantProvider>
               }/>
               </Route>
-
-              
-
                 <Route path="*" element={"not found"} />
             </Route>
           </Routes>
