@@ -1,15 +1,31 @@
 import { useEffect, useState } from "react";
-import { ReservationContext } from "./ReservationContext";
+import { DashboardContext } from "./DashboardContext";
 
-function ReservationProvider({ filter, children }) {
+function DashboardProvider({ children }) {
   const [reservationListDto, setReservationListDto] = useState({
     state: "ready",
     data: [],
   });
 
+  const [filters, setFilters] = useState({
+    userId: "",
+    restaurantId:"",
+  })
+
   useEffect(() => {
+    handleLoad()
+    console.log(filters, " |3")
+  }, [filters]);
+
+  function handleLoad(){
+    console.log(filters, " |1")
+    if (filters.userId === "" || filters.restaurantId === "" ) {
+      console.log(filters, " |2")
+      setReservationListDto({ state: "ready", data: [] });
+      return;
+    }
     setReservationListDto((current) => ({ ...current, state: "loading" }));
-    filter && fetch(`http://localhost:8000/reservation/list?${new URLSearchParams(filter)}`, {
+    fetch(`http://localhost:8000/reservation/list?${new URLSearchParams(filters)}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -29,17 +45,20 @@ function ReservationProvider({ filter, children }) {
           error: error.message,
         });
       });
-  }, [filter]);
+  }
 
   const value = {
     reservationList: reservationListDto.data || [],
+    handlerMap:{
+      setFilters:setFilters
+    }
   };
 
   return (
     <>
-      <ReservationContext.Provider value={value}>{children}</ReservationContext.Provider>
+      <DashboardContext.Provider value={value}>{children}</DashboardContext.Provider>
     </>
   );
 }
 
-export default ReservationProvider;
+export default DashboardProvider;

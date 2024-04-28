@@ -20,7 +20,7 @@ function UserProvider({ children }) {
         setUserListDto({ state: "ready", data: responseJson });
       }
     });
-  }, []);
+  }, [loggedInUser]);
 
   const value = {
     userList: userListDto.data || [],

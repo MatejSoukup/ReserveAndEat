@@ -1,44 +1,81 @@
 import { useEffect, useState } from "react";
-import { RestaurantContext } from "./RestaurantContext";
+import { useLocation, useSearchParams, useNavigate } from "react-router-dom";
 
-function RestaurantProvider({ filter, children }) {
-  const [restaurantListDto, setRestaurantListDto] = useState({
+import { RestaurantContext } from "./RestaurantContext.js";
+
+function RestaurantProvider({ children }) {
+  const [restaurantLoadObject, setRestaurantLoadObject] = useState({
     state: "ready",
-    data: [],
+    error: null,
+    data: null,
   });
 
+  const location = useLocation();
+  const navigate = useNavigate();
+
   useEffect(() => {
-    setRestaurantListDto((current) => ({ ...current, state: "loading" }));
-    fetch(`http://localhost:8000/restaurant/list`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-      },
+    handleLoad();
+  }, [location]);
+
+  function handleLoad() {
+    setRestaurantLoadObject((current) => ({ ...current, state: "pending" }));
+    fetch(`http://localhost:8000/restaurant/get?id=${new URLSearchParams(location.search).get("id")}`,{
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
     })
-      .then(async (response) => {
+    .then(async (response) => {
         const responseJson = await response.json();
         if (response.status >= 400) {
-          setRestaurantListDto({ state: "error", error: responseJson.error });
+            setRestaurantLoadObject({ state: "error", error: responseJson.error });
         } else {
-          setRestaurantListDto({ state: "ready", data: responseJson });
+            setRestaurantLoadObject({ state: "ready", data: responseJson });
         }
       })
       .catch((error) => {
-        setRestaurantListDto({
+        setRestaurantLoadObject({
           state: "error",
           error: error.message,
         });
       });
-  }, [filter]);
+  }
+
+  async function handleReservationCreate(reservation) {
+    const response = await fetch("http://localhost:8000/reservation/create", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(reservation),
+    });
+    const serverResponse = await response.json();
+    if (response.status < 400) {
+      
+    }
+  }
+
+  async function addRestaurantToFavorite(dtoIn){
+    console.log(dtoIn)
+    const response = await fetch(`http://localhost:8000/user/favorite/add?${new URLSearchParams(dtoIn)}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    });
+    const serverResponse = await response.json();
+    console.log(serverResponse)
+    return serverResponse
+  }
 
   const value = {
-    restaurantList: restaurantListDto.data || [],
+    restaurant: restaurantLoadObject.data,
+    makeReservation: handleReservationCreate,
+    addtoFavorite: addRestaurantToFavorite
   };
 
   return (
-    <>
-      <RestaurantContext.Provider value={value}>{children}</RestaurantContext.Provider>
-    </>
+    <RestaurantContext.Provider value={value}>{children}</RestaurantContext.Provider>
   );
 }
 
