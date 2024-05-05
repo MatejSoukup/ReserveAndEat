@@ -33,6 +33,7 @@ function RestaurantCreateForm(){
   }
 
 
+if(loggedInUser){
 return (
 
   <form onSubmit={handleSubmit}>
@@ -102,5 +103,6 @@ type="text"
     <button type="submit">Submit</button>
   </form>
 );
+}
 }
 export default RestaurantCreateForm;

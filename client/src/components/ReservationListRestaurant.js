@@ -15,7 +15,7 @@ return(
     <div className="backgroundReservation">
         {reservationList.map(reservation => {
         return(
-        <ReservationCardRestaurant reservation={reservation}/>
+        <ReservationCardRestaurant key={reservation.id} reservation={reservation}/>
         )})}
     </div>
 

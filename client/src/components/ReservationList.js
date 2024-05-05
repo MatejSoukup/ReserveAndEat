@@ -15,7 +15,7 @@ return(
     <div className="backgroundReservation">
         {props.reservationList.map(reservation => {
         return(
-        <ReservationCardUser reservation={reservation}/>
+        <ReservationCardUser key={reservation.id} reservation={reservation}/>
         )})}
     </div>
 

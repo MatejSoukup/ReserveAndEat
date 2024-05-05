@@ -15,22 +15,17 @@ function DashboardProvider({ children }) {
   
 
   const [filters, setFilters] = useState({
-    userId: "",
-    restaurantId:"",
+    userId: null,
   })
 
   useEffect(() => {
     handleLoad()
-    handleUserRestaurants()
+    if(filters.userId){
+      handleUserRestaurants()
+    }
   }, [filters]);
 
   function handleLoad(){
-    console.log(filters, " |1")
-    if (filters.userId === "" || filters.restaurantId === "" ) {
-      console.log(filters, " |2")
-      setReservationListDto({ state: "ready", data: [] });
-      return;
-    }
     setReservationListDto((current) => ({ ...current, state: "loading" }));
     fetch(`http://localhost:8000/reservation/list?${new URLSearchParams(filters)}`, {
       method: "GET",
@@ -55,7 +50,6 @@ function DashboardProvider({ children }) {
   }
 
   function handleUserRestaurants(){
-    console.log("restaurant")
       setRestaurantListDto((current) => ({ ...current, state: "loading" }));
       fetch(`http://localhost:8000/restaurant/list?${new URLSearchParams(filters)}`, {
         method: "GET",

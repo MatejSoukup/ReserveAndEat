@@ -2,7 +2,6 @@ import { useContext } from "react";
 import { RestaurantContext } from "../RestaurantContext";
 
 function ReservationCardRestaurant(props) {
-    console.log(props.reservation)
   const { updateReservation} = useContext(RestaurantContext);
 
   let reservation = props.reservation;

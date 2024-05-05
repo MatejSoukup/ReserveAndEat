@@ -10,7 +10,7 @@ function RestaurantList({restaurantList}){
                 {
                     restaurantList.map(restaurant => {
                         return(
-                            <RestuarantCard restaurant={restaurant}/>
+                            <RestuarantCard key={restaurant.id} restaurant={restaurant}/>
                         )
                     })
                 }

@@ -10,6 +10,8 @@ import Restaurants from './components/Restaurants'
 import RestaurantListProvider from './components/RestaurantListProvider';
 import RestaurantProvider from './components/RestaurantProvider';
 import RestaurantRoute from './components/RestaurantRoute';
+import RestaurantFormProvider from "./components/RestaurantFormProvider";
+import RestaurantCreateForm from "./components/RestaurantCreateForm"
 
 function App() {
 
@@ -35,7 +37,12 @@ function App() {
                 <RestaurantProvider>
                   <RestaurantRoute/>
                 </RestaurantProvider>
-              }/>
+                }/>
+                <Route path="restaurantCreate" element={
+                  <RestaurantFormProvider>
+                    <RestaurantCreateForm/>
+                  </RestaurantFormProvider>
+                }/>
               </Route>
                 <Route path="*" element={"not found"} />
             </Route>

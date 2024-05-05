@@ -92,7 +92,6 @@ function RestaurantProvider({ children }) {
   }
 
   async function addRestaurantToFavorite(dtoIn){
-    console.log(dtoIn)
     const response = await fetch(`http://localhost:8000/user/favorite/add?${new URLSearchParams(dtoIn)}`, {
       method: "POST",
       headers: {
@@ -100,15 +99,12 @@ function RestaurantProvider({ children }) {
       }
     });
     const serverResponse = await response.json();
-    console.log(serverResponse)
     return serverResponse
   }
 
 
   function handleLoadReservationList(){
-    console.log(filters, " |1")
     if (filters.restaurantId === "" ){
-      console.log(filters, " |2")
       setReservationListDto({ state: "ready", data: [] });
       return;
     }
@@ -140,6 +136,7 @@ function RestaurantProvider({ children }) {
 
   const value = {
     restaurant: restaurantLoadObject.data,
+    restaurantStatus: restaurantLoadObject.state,
     reservationList: reservationListDto.data,
     makeReservation: handleReservationCreate,
     updateReservation: handleReservationUpdate,
