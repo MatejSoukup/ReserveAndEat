@@ -37,17 +37,17 @@ function ReservationForm({ user, restaurant }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <div>Reservation</div>
-        <input defaultValue={1} min={1} name="numberOfPeople" type="number" placeholder="Number of people" />
-        <input name="date" type="date" placeholder="Date" />
-        <input name="time" type="time" placeholder="Time" />
+    <form className='reservation-from' onSubmit={handleSubmit}>
+      <div className='reservation-from'>
+        <div className='formName'>Reservation</div>
+        <input className='formInput' defaultValue={1} min={1} name="numberOfPeople" type="number" placeholder="Number of people" />
+        <input className='formInput' name="date" type="date" placeholder="Date" />
+        <input className='formInput' name="time" type="time" placeholder="Time" />
       </div>
-      <div>
-        <textarea name="message" placeholder="Message for the restaurant" />
+      <div className='reservation-from'>
+        <textarea className='formInput' name="message" placeholder="Message for the restaurant" />
         <div>
-          <input type="submit" value="Make reservation" />
+          <input className='formInput'  type="submit" value="Make reservation" />
         </div>
       </div>
     </form>

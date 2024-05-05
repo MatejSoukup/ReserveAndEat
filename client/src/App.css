@@ -1,16 +1,24 @@
+:root {
+  --primary-color: #9C2542;
+  --secondary-color: #D9D9D9;
+  --font-color: white;
+  --link-color: #61dafb;
+  --font-size-base: 16px;
+  --border-radius: 16px;
+  --default-spacing: 16px;
+  --default-padding: 12px;
+  --animation-speed: 20s;
+}
+
 .App {
   text-align: center;
+  font-size: var(--font-size-base);
 }
 
 .App-logo {
   height: 40vmin;
   pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+  animation: App-logo-spin infinite var(--animation-speed) linear;
 }
 
 .App-header {
@@ -21,11 +29,11 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: var(--font-color);
 }
 
 .App-link {
-  color: #61dafb;
+  color: var(--link-color);
 }
 
 .Navbar {
@@ -34,7 +42,7 @@
   align-items: center;
   height: 60px;
   padding: 0 20px;
-  background-color: #9C2542;
+  background-color: var(--primary-color);
 }
 
 .Menu {
@@ -44,7 +52,7 @@
 
 .logo {
   font-size: 32px;
-  color: white;
+  color: var(--font-color);
   display: flex;
   align-items: center;
 }
@@ -57,7 +65,7 @@
   width: 42px;
   height: 42px;
   border-radius: 50%;
-  background-color: #D9D9D9;
+  background-color: var(--secondary-color);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -76,34 +84,32 @@ a:hover {
   cursor: pointer;
 }
 
-
-.listHeader{
+.listHeader {
   font-size: 40px;
   display: flex;
   align-items: center;
-  margin-top: 20px;
+  margin-top: var(--default-spacing);
 }
 
-.page{
+.page {
   max-width: 1200px;
   margin: auto;
 }
 
-.backgroundReservation{
-  background-color: #D9D9D9;
-  border-radius: 16px;
-  padding: 12px;
+.backgroundReservation {
+  background-color: var(--secondary-color);
+  border-radius: var(--border-radius);
+  padding: var(--default-padding);
   display: flex;
   flex-direction: column;
-  row-gap: 12px;
+  row-gap: var(--default-spacing);
 }
 
 .reservationCard {
   background-color: white;
-  border-radius: 16px;
+  border-radius: var(--border-radius);
   display: flex;
   align-items: center;
-  justify-content: center;
   height: 8vh;
   width: 100%;
   margin: 0 auto;
@@ -128,28 +134,26 @@ a:hover {
   margin-right: 16px;
 }
 
-.backgroundRestaurant{
-  background-color: #D9D9D9;
-  border-radius: 16px;
-  padding: 12px;
+.backgroundRestaurant {
+  background-color: var(--secondary-color);
+  border-radius: var(--border-radius);
+  padding: var(--default-padding);
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 16px;
-  row-gap: 12px;
+  gap: var(--default-spacing);
 }
 
-.restaurantCard{
+.restaurantCard {
   background-color: white;
-  border-radius: 16px;
+  border-radius: var(--border-radius);
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-bottom: 16px;
+  padding-bottom: var(--default-padding);
   height: 250px;
   width: 377px;
   margin: 0 auto;
 }
-
 
 .iconContainer {
   margin-top: auto;
@@ -162,7 +166,7 @@ a:hover {
   margin-top: auto;
 }
 
-.navigationButtons{
+.navigationButtons {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -170,10 +174,10 @@ a:hover {
   gap: 1vw;
 }
 
-.navigationButton{
+.navigationButton {
   display: flex;
   height: 32px;
-  border-radius: 16px;
+  border-radius: var(--border-radius);
   border: 2px solid black;
   background-color: white;
   font-weight: bold;
@@ -185,36 +189,108 @@ a:hover {
   min-width: 160px;
 }
 
-.category-select{
+.category-select {
   display: flex;
-  border-radius: 16px;
+  border-radius: var(--border-radius);
 }
 
-#category{
-  border-radius: 16px;
-  border: 2px black solid;
+#category {
+  border-radius: var(--border-radius);
+  border: 2px solid black;
   width: 150px;
 }
 
-.filters{
+.filters {
   margin: 16px 0 0 auto;
 }
 
-.filters form{
+.filters form {
   display: flex;
   justify-content: center;
   height: 32px;
   gap: 4px;
 }
 
-.filterButton{
+.filterButton {
   background-color: white;
-  width: 3vw;
   font-weight: bold;
 }
 
-.formInput{
-  border-radius: 16px;
+.formInput {
+  border-radius: var(--border-radius);
   background-color: white;
-  border: 2px black solid;
+  border: 2px solid black;
+}
+
+.centred {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.restaurant-name{
+  font-size: 32px;
+  display: flex;
+}
+
+.formName{
+  font-size: 32px;
+}
+
+.background{
+  background-color: var(--secondary-color);
+  border-radius: var(--border-radius);
+  padding: var(--default-padding);
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--default-spacing);
+  text-align: left;
+}
+
+.reservation-from{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 20vw;
+  justify-content: center;
+  margin: auto;
+}
+
+@media only screen and (max-width: 480px) {
+  
+  .backgroundRestaurant {
+
+    grid-template-columns: 1fr;
+
+  }
+
+  .listHeader {
+    flex-direction: column;
+    margin-bottom: 20px;
+  }
+
+  
+.filters form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  
+}
+
+.filters {
+  margin: 0;
+}
+
+select{
+  width: 100%;
+}
+
+
+#category {
+  border-radius: var(--border-radius);
+  border: 2px solid black;
+  width: 100%;
+}
+
+
 }

@@ -1,61 +1,65 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { RestaurantContext } from "../RestaurantContext";
+import { mdiCancel, mdiCheck } from "@mdi/js";
+import Icon from "@mdi/react"; // Import the Icon component
 
 function ReservationCardRestaurant(props) {
-  const { updateReservation} = useContext(RestaurantContext);
-
-  let reservation = props.reservation;
+  const { updateReservation } = useContext(RestaurantContext);
+  const reservation = props.reservation;
 
   const isConfirmed = reservation.status === "confirmed";
   const isCancelled = reservation.status === "cancelled";
 
+  let confirmedReservation = reservation 
+
   const handleConfirmClick = async () => {
-    let confirmedReservation = reservation;
+    
 
     delete confirmedReservation.restaurant;
     delete confirmedReservation.user;
-
-    reservation.status = "confirmed"
+    reservation.status = "confirmed";
     await updateReservation(reservation);
   };
 
   const handleCancelClick = async () => {
-    let confirmedReservation = reservation;
-
+    
     delete confirmedReservation.restaurant;
     delete confirmedReservation.user;
 
-    reservation.status = "cancelled"
+    reservation.status = "cancelled";
     await updateReservation(reservation);
   };
 
   return (
-    <div>
+    <div className="reservationCard">
       <div>
-        <div>
-          {reservation.user.email}
-        </div>
-        <div>
+        <div className="cardHeader">{reservation.user.email}</div>
+        <div className="cardBody">
+          <div>{reservation.restaurant.address.street}</div>
           <div>
-            {reservation.restaurant.address.street}
+            {reservation.date} {reservation.time}
           </div>
-          <div>
-            {reservation.date}
-            {reservation.time}
-          </div>
-          <div>
-            {reservation.numberOfPeople} People
-          </div>
+          <div>{reservation.numberOfPeople} People</div>
         </div>
       </div>
-      <div>
+      <div className="reservationStatus">
         <div>
-          <div onClick={handleCancelClick} style={{ color: isCancelled ? "gray" : "red", cursor: "pointer" }}>{isCancelled ? "cancelled" : "cancel"}</div>
-          <div onClick={handleConfirmClick} style={{ color: isConfirmed ? "gray" : "green", cursor: "pointer" }}>{isConfirmed ? "confirmed" : "confirm"}</div>
+          <div
+            onClick={handleCancelClick}
+            style={{ color: isCancelled ? "red" : "gray", cursor: "pointer" }}
+          >
+            <Icon path={mdiCancel} size={1} /> {/* Use the mdiCancel icon */}
+          </div>
+          <div
+            onClick={handleConfirmClick}
+            style={{ color: isConfirmed ? "green" : "gray", cursor: "pointer" }}
+          >
+            <Icon path={mdiCheck} size={1} /> {/* Use the mdiCheck icon */}
+          </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default ReservationCardRestaurant;

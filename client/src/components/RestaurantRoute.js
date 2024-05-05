@@ -31,7 +31,7 @@ function RestaurantRoute() {
   }
 
   return (
-    <div>
+    <div className="page">
       <RestaurantRouteUser loggedInUser={loggedInUser} restaurant={restaurant} />
     </div>
   );

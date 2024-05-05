@@ -3,7 +3,7 @@ import ReservationListRestaurant from "./ReservationListRestaurant";
 
 function RestaurantRouteRestaurant({restaurant ,reservationList}) {
     return (
-        <div>
+        <div className="page">
             <RestaurantDetail restaurant={restaurant} />
             {reservationList ? <ReservationListRestaurant reservationList={reservationList} /> : <div></div>}
 
