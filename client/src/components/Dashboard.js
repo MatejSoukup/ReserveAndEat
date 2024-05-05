@@ -4,6 +4,8 @@ import { DashboardContext } from "./DashboardContext";
 import RestaurantList from "./RestaurantList";
 import ReservationList from "./ReservationList";
 import FavoriteRestaurantList from "./FavoriteRestaurantList"
+import RestaurantFormProvider from "./RestaurantFormProvider";
+import RestaurantCreateForm from "./RestaurantCreateForm"
 
 function Dashboard(){
     const {loggedInUser} = useContext(UserContext);
@@ -26,8 +28,14 @@ function Dashboard(){
         {
             return(
                 <div className="page">
-                    {restaurantList ? <RestaurantList restaurantList={restaurantList}/>: <div>loading</div>} 
-                </div>
+                    <div className="listHeader">
+                        User's restaurants
+                    </div>
+                        {restaurantList ? <RestaurantList restaurantList={restaurantList}/>: <div>loading</div>}
+                        <RestaurantFormProvider>
+                            <RestaurantCreateForm/>
+                        </RestaurantFormProvider>
+                    </div>
             )
         } else if(loggedInUser.roleId ==="6dc9e10052b05af79d8d274790321b13"){
             return(

@@ -1,34 +1,62 @@
-function ReservationCardRestaurant(props){
-    const isConfirmed = props.reservation.status === "confirmed";
-    const isCancelled = props.reservation.status === "cancelled";
+import { useContext } from "react";
+import { RestaurantContext } from "../RestaurantContext";
 
-    return(
+function ReservationCardRestaurant(props) {
+    console.log(props.reservation)
+  const { updateReservation} = useContext(RestaurantContext);
+
+  let reservation = props.reservation;
+
+  const isConfirmed = reservation.status === "confirmed";
+  const isCancelled = reservation.status === "cancelled";
+
+  const handleConfirmClick = async () => {
+    let confirmedReservation = reservation;
+
+    delete confirmedReservation.restaurant;
+    delete confirmedReservation.user;
+
+    reservation.status = "confirmed"
+    await updateReservation(reservation);
+  };
+
+  const handleCancelClick = async () => {
+    let confirmedReservation = reservation;
+
+    delete confirmedReservation.restaurant;
+    delete confirmedReservation.user;
+
+    reservation.status = "cancelled"
+    await updateReservation(reservation);
+  };
+
+  return (
+    <div>
+      <div>
         <div>
-        <div>
-            <div>
-                {props.reservation.user.email}
-            </div>
-            <div>
-                <div>
-                    {props.reservation.restaurant.address.street}
-                </div>
-                <div>
-                    {props.reservation.date}
-                    {props.reservation.time}
-                </div>
-                <div>
-                    {props.reservation.numberOfPeople} People
-                </div>    
-            </div>   
+          {reservation.user.email}
         </div>
         <div>
-            <div>
-                <div>{isCancelled ? "cancelled" : "disabled cancelled"}</div>
-                <div>{isConfirmed ? "confirmed" : "disabled confirmed"}</div>
-            </div>
+          <div>
+            {reservation.restaurant.address.street}
+          </div>
+          <div>
+            {reservation.date}
+            {reservation.time}
+          </div>
+          <div>
+            {reservation.numberOfPeople} People
+          </div>
         </div>
+      </div>
+      <div>
+        <div>
+          <div onClick={handleCancelClick} style={{ color: isCancelled ? "gray" : "red", cursor: "pointer" }}>{isCancelled ? "cancelled" : "cancel"}</div>
+          <div onClick={handleConfirmClick} style={{ color: isConfirmed ? "gray" : "green", cursor: "pointer" }}>{isConfirmed ? "confirmed" : "confirm"}</div>
+        </div>
+      </div>
     </div>
-    )
+  )
 }
 
 export default ReservationCardRestaurant;
